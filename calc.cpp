@@ -276,6 +276,7 @@ int main()
 		cout << "Ошибка!" << endl;
 	else
 		printf("%.2f", result.top());
+	delete[]symbols;
 	return 0;
 }
 
