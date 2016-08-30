@@ -6,7 +6,7 @@ using namespace std;
 
 string convert_char_to_string(char s)
 {
-	string a = "1";
+	string a = "1";//РїСЂРѕСЃС‚РёС‚Рµ Р·Р° РєРѕСЃС‚С‹Р»СЊ
 	a[0] = s;
 	return a;
 }
@@ -69,7 +69,7 @@ int main()
 	stack<string>output;
 	stack<char>operators;
 	int input_size = input.size();
-	//переведем из обычной записи в обратную польскую запись
+	//РїРµСЂРµРІРµРґРµРј РёР· РёРЅС„РёРєСЃРЅРѕР№ Р·Р°РїРёСЃРё РІ РѕР±СЂР°С‚РЅСѓСЋ РїРѕР»СЊСЃРєСѓСЋ
 	for (int i = 0; i < input_size; )
 	{
 		bool exit_brecket = false;
@@ -114,7 +114,7 @@ int main()
 				}
 				if (operators.empty())
 				{
-					cout << "количество открывающих и закрывающих скобок не совпадает" << endl;
+					cout << "РЅРµРїСЂР°РІРёР»СЊРЅРѕ СЂР°СЃСЃС‚Р°РІР»РµРЅС‹ СЃРєРѕР±РєРё" << endl;
 					return 0;
 				}
 				else
@@ -132,7 +132,7 @@ int main()
 		}
 		if (symbol.compare("")!=0&&num_is_true(symbol) == false)
 		{
-			cout << "некорректный ввод, строка содержит недопустимое выражение " << symbol << endl; 
+			cout << "РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РІРІРѕРґ, СЃС‚СЂРѕРєР° СЃРѕРґРµСЂР¶РёС‚ РЅРµРґРѕРїСѓСЃС‚РёРјРѕРµ РІС‹СЂР°Р¶РµРЅРёРµ " << symbol << endl; 
 			return 0;
 		}
 		else
@@ -144,7 +144,7 @@ int main()
 	{
 		if (operators.top() == '(')
 		{
-			cout << "количество закрывающих и открывающих скобок не совпадает";
+			cout << "РєРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РєСЂС‹РІР°СЋС‰РёС… Рё РѕС‚РєСЂС‹РІР°СЋС‰РёС… СЃРєРѕР±РѕРє РЅРµ СЃРѕРІРїР°РґР°РµС‚";
 			return 0;
 		}
 		output.push(convert_char_to_string(operators.top()));
@@ -209,7 +209,7 @@ int main()
 					result.pop();				
 					if (a == 0)
 					{
-					cout << "присутствует деление на 0!";
+					cout << "РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚ РґРµР»РµРЅРёРµ РЅР° 0!";
 					return 0;
 
 					}
@@ -273,7 +273,7 @@ int main()
 		}
 	}
 	if (result.size() != 1)
-		cout << "Ошибка!" << endl;
+		cout << "РћС€РёР±РєР°!" << endl;
 	else
 		printf("%.2f", result.top());
 	return 0;
