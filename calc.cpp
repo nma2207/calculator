@@ -67,12 +67,13 @@ int main()
 	for (int i = 0; i < input_size; )
 	{
 		bool exit_brecket = false;
+		bool open_brecket = false;
 		while (input[i] == ' ')
 			i++;
 		string symbol = "";
 		if (i < input_size && (input[i] == '-' || input[i] == '+'))
 		{
-			if (!operators.empty() && (operators.top() == '*' || operators.top() == '/' || operators.top() == '+' || operators.top() == '-'))
+			if (!operators.empty() && (operators.top() == '*' || operators.top() == '/' || operators.top() == '+' || operators.top() == '-'||operators.top()=='_'))
 			{
 				output.push(convert_char_to_string(operators.top()));
 				operators.pop();
@@ -82,7 +83,7 @@ int main()
 		}
 		if (i < input_size && (input[i] == '/' || input[i] == '*'))
 		{
-			if (!operators.empty() && (operators.top() == '*' || operators.top() == '/'))
+			if (!operators.empty() && (operators.top() == '*' || operators.top() == '/'||operators.top()=='_'))
 			{
 				output.push(convert_char_to_string(operators.top()));
 				operators.pop();
@@ -93,8 +94,22 @@ int main()
 		while (i < input_size && (input[i] == '('||input[i] == ' ' ))
 		{
 			if (input[i] != ' ')
+			{
 				operators.push('(');
+				open_brecket = true;
+			}
 			i++;
+		}
+		if (open_brecket)
+		{
+			while (i<input_size&&input[i] == ' ')
+				i++;
+			if (i < input_size&&input[i] == '-')
+			{
+				operators.push('_');//типа унарный минус
+				i++;
+				continue;
+			}
 		}
 		while (i < input_size&&(input[i] == ')' || input[i] == ' ' ))
 		{
@@ -161,6 +176,21 @@ int main()
 			result.push(convert_string_to_double(symbols[i]));
 		else
 		{
+			if (symbols[i].compare("_") == 0)
+			{
+				if (!result.empty())
+				{
+					a = result.top();
+					result.pop();
+					result.push(-a);
+				}
+				else
+				{
+					cout << "ERROR!!!!";
+					return 0;
+				}
+			}
+			else
 			if (symbols[i].compare("*") == 0)
 			{
 				
@@ -168,6 +198,7 @@ int main()
 				{
 					a = result.top();
 					result.pop();
+
 				}
 				else
 				{
@@ -178,13 +209,14 @@ int main()
 				{
 					b = result.top();
 					result.pop();
+					result.push(a*b);
 				}
 				else
 				{
 					cout << "ERROR!!!!";
 					return 0;
 				}
-				result.push(a*b);
+				
 			}
 			else 
 			if (symbols[i].compare("/") == 0)
@@ -202,7 +234,9 @@ int main()
 				if (!result.empty())
 				{
 					b = result.top();
-					result.pop();				
+					result.pop();	
+
+								
 					if (a == 0)
 					{
 					cout << "присутствует деление на 0!";
@@ -234,6 +268,7 @@ int main()
 				{
 					b = result.top();
 					result.pop();
+					
 					result.push(a+b);
 				}
 				else
@@ -249,6 +284,7 @@ int main()
 				{
 					a = result.top();
 					result.pop();
+
 				}
 				else
 				{
@@ -257,8 +293,10 @@ int main()
 				}
 				if (!result.empty())
 				{
+
 					b = result.top();
 					result.pop();
+
 					result.push(b-a);
 				}
 				else
