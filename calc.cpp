@@ -1,8 +1,6 @@
-
 #include<stack>
 #include<string>
 #include<iostream>
-#include<stdio.h>
 using namespace std;
 
 string convert_char_to_string(char s)
@@ -14,18 +12,12 @@ string convert_char_to_string(char s)
 }
 bool it_is_number(string a)
 {
-	if ('0' <= a[0] && a[0] <= '9')
-		return true;
-	else
-		return false;
+	return ('0' <= a[0] && a[0] <= '9');
 }
 bool it_is_num(char s)
 {
-	if (s == '+' || s == '-' || s == '*' || s == '/' || s == '(' || s == ')')
-		return false;
-	else
-		return true;
-
+	return !(s == '+' || s == '-' || s == '*' || s == '/' || s == '(' || s == ')');
+	
 }
 bool num_is_true(string s)
 {
@@ -71,7 +63,7 @@ int main()
 	stack<string>output;
 	stack<char>operators;
 	int input_size = input.size();
-	//переведем из инфиксной записи в обратную польскую
+	//переведем из обычной записи в обратную польскую запись
 	for (int i = 0; i < input_size; )
 	{
 		bool exit_brecket = false;
@@ -116,7 +108,7 @@ int main()
 				}
 				if (operators.empty())
 				{
-					cout << "неправильно расставлены скобки" << endl;
+					cout << "количество открывающих и закрывающих скобок не совпадает" << endl;
 					return 0;
 				}
 				else
@@ -134,7 +126,7 @@ int main()
 		}
 		if (symbol.compare("")!=0&&num_is_true(symbol) == false)
 		{
-			cout << "некорректный ввод, строка содержит недопустимое выражение " << symbol << endl;
+			cout << "некорректный ввод, строка содержит недопустимое выражение " << symbol << endl; 
 			return 0;
 		}
 		else
@@ -154,11 +146,13 @@ int main()
 	}
 	int symbols_size = output.size();
 	string*symbols = new string[symbols_size];
+	//переводим опреаторы и числа из стека в массив для удобства
 	for (int i = symbols_size - 1; !output.empty(); i--)
 	{
 		symbols[i] = output.top();
 		output.pop();
 	}
+	//вычисляем ответ
 	stack<double>result;
 	for (int i = 0; i < symbols_size; i++)
 	{
@@ -169,7 +163,7 @@ int main()
 		{
 			if (symbols[i].compare("*") == 0)
 			{
-
+				
 				if (!result.empty())
 				{
 					a = result.top();
@@ -192,7 +186,7 @@ int main()
 				}
 				result.push(a*b);
 			}
-			else
+			else 
 			if (symbols[i].compare("/") == 0)
 			{
 				if (!result.empty())
@@ -208,7 +202,7 @@ int main()
 				if (!result.empty())
 				{
 					b = result.top();
-					result.pop();
+					result.pop();				
 					if (a == 0)
 					{
 					cout << "присутствует деление на 0!";
@@ -277,8 +271,6 @@ int main()
 	if (result.size() != 1)
 		cout << "Ошибка!" << endl;
 	else
-		printf("%.2f",result.top());
-	delete[]symbols;
+		printf("%.2f", result.top());
 	return 0;
 }
-
