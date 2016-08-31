@@ -2,13 +2,15 @@
 #include<stack>
 #include<string>
 #include<iostream>
+#include<stdio.h>
 using namespace std;
 
 string convert_char_to_string(char s)
 {
-	string a = "1";//простите за костыль
+	char a[2];
 	a[0] = s;
-	return a;
+	a[1] = '\0';
+	return (string)a;
 }
 bool it_is_number(string a)
 {
@@ -23,7 +25,7 @@ bool it_is_num(char s)
 		return false;
 	else
 		return true;
-	
+
 }
 bool num_is_true(string s)
 {
@@ -132,7 +134,7 @@ int main()
 		}
 		if (symbol.compare("")!=0&&num_is_true(symbol) == false)
 		{
-			cout << "некорректный ввод, строка содержит недопустимое выражение " << symbol << endl; 
+			cout << "некорректный ввод, строка содержит недопустимое выражение " << symbol << endl;
 			return 0;
 		}
 		else
@@ -167,7 +169,7 @@ int main()
 		{
 			if (symbols[i].compare("*") == 0)
 			{
-				
+
 				if (!result.empty())
 				{
 					a = result.top();
@@ -190,7 +192,7 @@ int main()
 				}
 				result.push(a*b);
 			}
-			else 
+			else
 			if (symbols[i].compare("/") == 0)
 			{
 				if (!result.empty())
@@ -206,7 +208,7 @@ int main()
 				if (!result.empty())
 				{
 					b = result.top();
-					result.pop();				
+					result.pop();
 					if (a == 0)
 					{
 					cout << "присутствует деление на 0!";
@@ -275,7 +277,7 @@ int main()
 	if (result.size() != 1)
 		cout << "Ошибка!" << endl;
 	else
-		printf("%.2f", result.top());
+		printf("%.2f",result.top());
 	delete[]symbols;
 	return 0;
 }
